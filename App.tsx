@@ -16,6 +16,7 @@ const imagens: ImageSourcePropType[] = [
 export default function App() {
   const[Num, setNum] = useState(0);
   //const[Anterior, setAnterior] = useState(0);
+  const[C, setC] = useState('W');
   
   function trocaEstado(){
     let sorteio = 0;
@@ -25,49 +26,41 @@ export default function App() {
     }while(sorteio === Num)
     setNum(sorteio);  
     //setAnterior(Num);
+
+    if(sorteio < 3){
+      setC('yellow');
+    }
+    else if(sorteio == 3 || sorteio == 4){
+      setC('blue');
+    }
+    else{
+      setC('white');
+    }
   }
 
   return (
-    <View style={styles.container}>
+    <View style={{backgroundColor: C, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={styles.texto}>Sorte</Text>
       <TouchableOpacity onPress={trocaEstado}>
-        <Image style={styles2.imagem} source={imagens[Num]}></Image>  
-        <Text style={styles2.texto}>Número sorteado: {Num + 1}</Text>
+
+        <Image style={styles.imagem} source={imagens[Num]}></Image>  
+
       </TouchableOpacity>
+      <Text style={styles.texto}>Número sorteado: {Num + 1}</Text>
       <StatusBar style="auto" /> 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#956ece',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-const styles2 = StyleSheet.create({
   texto: {
-    color: '#fff',
+    color: '#000',
     fontSize: 40,
     fontWeight: 'bold',
-  },
-  fonteCinza: {
-    color: '#c7c9cc',
-    fontSize: 20,
-    fontWeight: 'bold',
+    margin: 49,
   },
   imagem: {
     width: 200,
     height: 200,
   },
-  imagem2: {
-    width: 100,
-    height: 100,
-  }
-});
-
-const styles3 = StyleSheet.create({
-
 });
